@@ -13,19 +13,18 @@ barcode = args.barcode
 name = args.name
 category = args.category
 
-#barcode = sys.argv[1]
-
+#open database connection
 db = MySQLdb.connect("localhost","emma","sudosudo!!","pantry")
 
 cursor = db.cursor()
 
+#check the product_list for existing entry
 cursor.execute("SELECT barcode_num FROM product_list WHERE barcode_num = '%s'" % barcode)
 
 row_count = cursor.rowcount
 
+#if this barcode is not found in product_list
 if row_count == 0: 
-#	name = sys.argv[2]
-#	category = sys.argv[3]
 	cursor.execute("INSERT INTO product_list(name, barcode_num, category) VALUES ('%s', %s, '%s')" % (name, barcode, category))
 	db.commit()
 db.close() 
