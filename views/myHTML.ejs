@@ -1,56 +1,45 @@
-<!DOCTYPE html>
-<html>
-<title>Smart Fridge</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/css/mycss.css">
-<link rel="stylesheet" type="text/css" href="/css/w3css.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
-body, html {
+<!DOCTYPE html> 
+<html> 
+<title>Smart Fridge</title> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" type="text/css" href="mycss.css"> 
+<link rel="stylesheet" type="text/css" href="w3css.css"> 
+<script type="javascript" src="script.js"></script>
+<style> body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;} body, 
+html {
     height: 100%;
     color: #777;
     line-height: 1.8;
 }
-
-/* Create a Parallax Effect */
+/* Create a Parallax Effect */ 
 .bgimg-1, .bgimg-2, .bgimg-3 {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-/* First image (Logo. Full height) */
+/* First image (Logo. Full height) */ 
 .bgimg-1 {
     background-image: url("fridgeofveggies.jpg");
     min-height: 100%;
 }
-
-/* Second image (Portfolio) */
+/* Second image (Portfolio) */ 
 .bgimg-2 {
     background-image: url("strawberries.jpg");
     min-height: 400px;
 }
-
-/* Third image (Contact) */
-.bgimg-3 {
-    background-image: url("washedveggies.jpg");
-    min-height: 400px;
-}
-.w3-wide {letter-spacing: 10px;}
-.w3-hover-opacity {cursor: pointer;}
-
-/* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 1024px) {
+.w3-wide {letter-spacing: 10px;} .w3-hover-opacity {cursor: 
+pointer;} /* Turn off parallax scrolling for tablets and phones 
+*/ @media only screen and (max-device-width: 1024px) {
     .bgimg-1, .bgimg-2, .bgimg-3 {
         background-attachment: scroll;
     }
 }
-</style>
-<body>
+</style> 
+<body> 
 
-<!-- Navbar (sit on top) -->
+<!-- Navbar (sit on top) --> 
 <div class="w3-top">
   <div class="w3-bar" id="myNavbar">
     <a style="color: #2d2d2d" class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">MENU</a>
@@ -58,65 +47,68 @@ body, html {
     <a href="#editpantry" style="color: #2d2d2d" class="w3-bar-item w3-button w3-hide-small">EDIT PANTRY</a>
     <a href="#editdatabase" style="color: #2d2d2d" class="w3-bar-item w3-button w3-hide-small">DATABASE</a>
   </div>
-
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
     <a href="#pantry" class="w3-bar-item w3-button" onclick="toggleFunction()">MY PANTRY</a>
     <a href="#editpantry" class="w3-bar-item w3-button" onclick="toggleFunction()">EDIT PANTRY</a>
     <a href="#editdatabase" class="w3-bar-item w3-button" onclick="toggleFunction()">DATABASE</a>
-  </div>
-</div>
+  </div> 
 
-<!-- First Parallax Image with Logo Text -->
+</div>
+<!-- First Parallax Image with Logo Text --> 
 <div class="bgimg-1 w3-display-container w3-opacity-min">
   <div class="w3-display-middle" style="white-space:nowrap;">
     <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">MY <span class="w3-hide-small">SMART</span> FRIDGE</span>
-  </div>
-</div>
+  </div> 
+</div> 
 
-<!-- Container (Pantry Section) -->
+<!-- Container (Pantry Section) --> 
 <div class="w3-content w3-container w3-padding-64" id="pantry">
   <h3 class="w3-center">MY PANTRY</h3>
-  <p class="w3-center"><em>Here's what is in your pantry!</em></p>
+  <p class="w3-center"><em>Here's what is in your pantry!</em></p> 
+  <table class="w3-table w3-table-all">
+     <tr>
+       <th width="50px">No.</th>
+       <th>Name</th>
+       <th>Quantity</th>
+<!--      <th>Add</th>
+       <th>Delete</th> -->
+     </tr>
+     <% if(data.length){
+       for(var i = 0;i < data.length;i++) { %>
+     <tr>
+       <td><%=(i+1)%></td>
+       <td><%=data[i].name%></td>
+       <td><%=data[i].quantity%></td>
+     </tr>
+     <% }
+     }else{ %>
+     <tr>
+       <td colspan="3">No user</td>
+     </tr>
+   <% } %>
+   </table>
+</div>
+<div class="w3-center my-padding-64"><button id="addPantryBtn" style="color: #97ba60;" class="w3-button w3-hover-black">ADD</button>
 </div>
 
-
-<!-- Second Parallax Image with Pantry Text -->
+<!-- Second Parallax Image with Pantry Text --> 
 <div class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
     <span class="w3-xxlarge w3-text-white w3-wide">FOOD IS GOOD</span>
-  </div>
-</div>
+  </div> 
+</div> 
 
-<!-- Container (Edit Pantry Section) -->
-<div class="w3-content w3-container w3-padding-64" id="editpantry">
-  <h3 class="w3-center">EDIT PANTRY</h3>
-  <p class="w3-center"><em>Add or remove an item from your pantry.</em></p><br>
-
-  <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-  <div class="w3-row-padding w3-center"> <!--put pantry script form here -->
-  </div>
-
-  <div class="w3-row-padding w3-center w3-section"> <!--and here -->
-  </div>
-</div>
-
-<!-- Third Parallax Image with Edit Pantry Text -->
-<div class="bgimg-3 w3-display-container w3-opacity-min">
-  <div class="w3-display-middle">
-     <span class="w3-xxlarge w3-text-white w3-wide">FOOD IS REALLY GOOD</span>
-  </div>
-</div>
-
-<!-- Container (Edit Database Section) -->
+<!-- Container (Edit Database Section) --> 
 <div class="w3-content w3-container w3-padding-64" id="editdatabase">
   <h3 class="w3-center">EDIT DATABASE</h3>
   <p class="w3-center"><em>Add or remove an item from the database.</em></p>
   <div class="w3-center"><button id="addBtn" style="color: #97ba60;" class="w3-button w3-hover-black">ADD</button>
-  <button id="deleteBtn" style="color: #e8541e;" class="w3-button w3-hover-black">DELETE</button></div>
-</div>
+    <button id="deleteBtn" style="color: #e8541e;" class="w3-button w3-hover-black">DELETE</button>
+  </div> 
+</div> 
 
-<!-- Modal for add form on click-->
+<!-- Modal for add form on click--> 
 <div id="addModal" class="modal">
   <div class="modal-content">
      <button class="close-add w3-button">CLOSE</button>
@@ -133,11 +125,10 @@ body, html {
         <br/>
         <button type="submit" class="w3-button">ADD</button>
      </form>
-  </div>
-</div>
+  </div> 
+</div> 
 
-
-<!-- Modal for delete form on click-->
+<!-- Modal for delete form on click--> 
 <div id="deleteModal" class="modal">
   <div class="modal-content">
      <button class="close-delete w3-button">CLOSE</button>
@@ -150,80 +141,11 @@ body, html {
         <br/>
         <button type="submit" class="w3-button">DELETE</button>
      </form>
-
-  </div>
-</div>
-
-
-<!-- Footer -->
+  </div> 
+</div> 
+<!-- Footer --> 
 <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-  <a href="#" class="w3-button w3-light-grey">To the top</a>
-</footer>
- 
-<script>
-// ADD MODAL
-
-// Get the Modal
-var modal_add = document.getElementById('addModal');
-
-// Get the button that opens the modal
-var btn_add = document.getElementById("addBtn");
-
-// Get the element that closes the modal
-var close_add = document.getElementsByClassName("close-add")[0];
-
-// When the user clicks the button, open the modal 
-btn_add.onclick = function() {
-    modal_add.style.display = "block";
-}
-
-// When the user clicks on CLOSE, close the modal
-close_add.onclick = function() {
-    modal_add.style.display = "none";
-}
-
-// DELETE MODAL
-
-// Get the Modal
-var modal_delete = document.getElementById('deleteModal');
-
-// Get the button that opens the modal
-var btn_delete = document.getElementById("deleteBtn");
-
-// Get the element that closes the modal
-var close_delete = document.getElementsByClassName("close-delete")[0];
-
-// When the user clicks the button, open the modal
-btn_delete.onclick = function() {
-    modal_delete.style.display = "block";
-}
-
-// When the user clicks on CLOSE, close the modal
-close_delete.onclick = function() {
-    modal_delete.style.display = "none";
-}
-
-// Change style of navbar on scroll
-window.onscroll = function() {myFunction()};
-function myFunction() {
-    var navbar = document.getElementById("myNavbar");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
-    } else {
-        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
-    }
-}
-
-// Used to toggle the menu on small screens when clicking on the menu button
-function toggleFunction() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
-</body>
+  <a href="#" class="w3-button w3-light-grey">To the top</a> 
+</footer> 
+</body> 
 </html>
-
