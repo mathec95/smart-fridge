@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" type="text/css" href="mycss.css"> 
 <link rel="stylesheet" type="text/css" href="w3css.css"> 
-<script type="javascript" src="script.js"></script>
 <style> body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;} body, 
 html {
     height: 100%;
@@ -43,20 +42,20 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
 <div class="w3-top">
   <div class="w3-bar" id="myNavbar">
     <a style="color: #2d2d2d" class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">MENU</a>
+    <a href="#home" style="color: #2d2d2d" class="w3-bar-item w3-button w3-hide-small">HOME</a>
     <a href="#pantry" style="color: #2d2d2d" class="w3-bar-item w3-button w3-hide-small">MY PANTRY</a>
-    <a href="#editpantry" style="color: #2d2d2d" class="w3-bar-item w3-button w3-hide-small">EDIT PANTRY</a>
     <a href="#editdatabase" style="color: #2d2d2d" class="w3-bar-item w3-button w3-hide-small">DATABASE</a>
   </div>
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="#home" class="w3-bar-item w3-button" onclick="toggleFunction()">HOME</a>
     <a href="#pantry" class="w3-bar-item w3-button" onclick="toggleFunction()">MY PANTRY</a>
-    <a href="#editpantry" class="w3-bar-item w3-button" onclick="toggleFunction()">EDIT PANTRY</a>
     <a href="#editdatabase" class="w3-bar-item w3-button" onclick="toggleFunction()">DATABASE</a>
   </div> 
 
 </div>
 <!-- First Parallax Image with Logo Text --> 
-<div class="bgimg-1 w3-display-container w3-opacity-min">
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle" style="white-space:nowrap;">
     <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">MY <span class="w3-hide-small">SMART</span> FRIDGE</span>
   </div> 
@@ -84,12 +83,13 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
      <% }
      }else{ %>
      <tr>
-       <td colspan="3">No user</td>
+       <td colspan="3">No entry</td>
      </tr>
    <% } %>
    </table>
 </div>
-<div class="w3-center my-padding-64"><button id="addPantryBtn" style="color: #97ba60;" class="w3-button w3-hover-black">ADD</button>
+<div class="w3-center my-padding-64">
+  <button id="addPantryBtn" style="color: #97ba60;" class="w3-button w3-hover-black">ADD</button>
 </div>
 
 <!-- Second Parallax Image with Pantry Text --> 
@@ -103,10 +103,28 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
 <div class="w3-content w3-container w3-padding-64" id="editdatabase">
   <h3 class="w3-center">EDIT DATABASE</h3>
   <p class="w3-center"><em>Add or remove an item from the database.</em></p>
-  <div class="w3-center"><button id="addBtn" style="color: #97ba60;" class="w3-button w3-hover-black">ADD</button>
+  <div class="w3-center">
+    <button id="addBtn" style="color: #97ba60;" class="w3-button w3-hover-black">ADD</button>
     <button id="deleteBtn" style="color: #e8541e;" class="w3-button w3-hover-black">DELETE</button>
   </div> 
 </div> 
+
+<!-- Modal for add pantry form on click -->
+<div id="addPantryModal" class="modal">
+  <div class="modal-content">
+     <button class="close-add-pantry w3-button">CLOSE</button>
+     <br/>
+     <br/>
+     <form action='/addPantry' method="post">
+        <br/>
+        <input class="w3-input" name="addPantryBarcode" type="text" placeholder="barcode" required == $0></input>
+        <br/>
+        <br/>
+        <button type="submit" class="w3-button">ADD</button>
+     </form>
+  </div>
+</div>
+
 
 <!-- Modal for add form on click--> 
 <div id="addModal" class="modal">
@@ -147,5 +165,93 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
 <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
   <a href="#" class="w3-button w3-light-grey">To the top</a> 
 </footer> 
+<script>
+
+// ADD PANTRY MODAL
+
+
+// Get the Modal
+var modal_add_pantry = document.getElementById('addPantryModal');
+
+// Get the button that opens the modal
+var btn_add_pantry = document.getElementById("addPantryBtn");
+
+// Get the element that closes the modal
+var close_add_pantry = document.getElementsByClassName("close-add-pantry")[0];
+
+// When the user clicks the button, open the modal
+btn_add_pantry.onclick = function() {
+    modal_add_pantry.style.display = "block";
+}
+
+// When the user clicks on CLOSE, close the modal
+close_add_pantry.onclick = function() {
+    modal_add_pantry.style.display = "none";
+}
+
+// ADD MODAL
+
+// Get the Modal
+var modal_add = document.getElementById('addModal');
+
+// Get the button that opens the modal
+var btn_add = document.getElementById("addBtn");
+
+// Get the element that closes the modal
+var close_add = document.getElementsByClassName("close-add")[0];
+
+// When the user clicks the button, open the modal
+btn_add.onclick = function() {
+    modal_add.style.display = "block";
+}
+
+// When the user clicks on CLOSE, close the modal
+close_add.onclick = function() {
+    modal_add.style.display = "none";
+}
+
+// DELETE MODAL
+
+// Get the Modal
+var modal_delete = document.getElementById('deleteModal');
+
+// Get the button that opens the modal
+var btn_delete = document.getElementById("deleteBtn");
+
+// Get the element that closes the modal
+var close_delete = document.getElementsByClassName("close-delete")[0];
+
+// When the user clicks the button, open the modal
+btn_delete.onclick = function() {
+    modal_delete.style.display = "block";
+}
+
+// When the user clicks on CLOSE, close the modal
+close_delete.onclick = function() {
+    modal_delete.style.display = "none";
+}
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+</script>
 </body> 
 </html>

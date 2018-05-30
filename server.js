@@ -20,7 +20,7 @@ app.engine('ejs', engine); //use ejs as the templating engine
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/css'));
-app.use(express.statuc(__dirname + '/views'));
+app.use(express.static(__dirname + '/views'));
 
 server.listen(PORT, function(){
 	console.log('Server started on port ' + PORT)

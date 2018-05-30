@@ -37,7 +37,7 @@ exports.list = function (req, res){
 exports.addPantry = function (req) {
 	var options = {
 		scriptPath: '/var/www/node/controllers/scripts/',
-		args: [req.body.addBarcode]
+		args: [req.body.addPantryBarcode]
 	}
 	PythonShell.run('add_to_pantry.py', options, function (err, results) {
 		if (err) throw err;

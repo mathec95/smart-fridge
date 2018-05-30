@@ -22,6 +22,21 @@
     width: 50%;
 }
 
+/* The Close Button for Add Pantry Form */
+.close-add-pantry {
+    color: #aaaaaa;
+    float: right;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.close-add-pantry:hover,
+.close-add-pantry:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* The Close Button for Add Form */
 .close-add {
     color: #aaaaaa;

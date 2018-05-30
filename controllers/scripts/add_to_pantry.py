@@ -4,10 +4,10 @@ import sys
 import MySQLdb
 import argparse
 
-parser = argparse.ArgumentParseR()
-parser.add_argument("barcode"
+parser = argparse.ArgumentParser()
+parser.add_argument("addPantryBarcode")
 args = parser.parse_args()
-barcode = args.barcode
+barcode = args.addPantryBarcode
 
 # open database connection
 db = MySQLdb.connect("localhost","emma","sudosudo!!","pantry")
@@ -23,19 +23,19 @@ if cursor.rowcount == 0:
 	cursor.execute("SELECT barcode_num FROM product_list WHERE barcode_num = '%s'" % barcode)
 	# if this barcode is not in database:
 #	figure out how to render a form from this file in html.
-	if cursor.rowcount == 0:
+#	if cursor.rowcount == 0:
 #		name = raw_input("Name: ")
 #		category = raw_input("Category: ")
 #	break out of the python script (for now. Come back and add this functionality later)
-		return
 #
 #
-#		# add item to database
+		# add item to database
 #		cursor.execute("INSERT INTO product_list(name, barcode_num, category) VALUES ('%s', '%s', '%s')" % (name, barcode, category))
 #		db.commit()
 	# add item to purchases list
-	cursor.execute("INSERT INTO purchases(barcode_num) VALUES ('%s')" % barcode)
-	db.commit()
+	if cursor.rowcount != 0:
+		cursor.execute("INSERT INTO purchases(barcode_num) VALUES ('%s')" % barcode)
+		db.commit()
 # if the item already exists in purchases, update the quantity of that item
 elif cursor.rowcount != 0:
 	cursor.execute("SELECT quantity FROM purchases WHERE barcode_num = '%s'" % barcode)
