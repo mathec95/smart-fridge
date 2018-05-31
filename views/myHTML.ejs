@@ -70,15 +70,24 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
        <th width="50px">No.</th>
        <th>Name</th>
        <th>Quantity</th>
-<!--      <th>Add</th>
-       <th>Delete</th> -->
-     </tr>
+       <th>Add</th>
+       <th>Delete</th>
+     </tr>    
      <% if(data.length){
        for(var i = 0;i < data.length;i++) { %>
      <tr>
        <td><%=(i+1)%></td>
+       <input type="hidden" name="itemName" value="<%=data[i].name%>"/>
        <td><%=data[i].name%></td>
        <td><%=data[i].quantity%></td>
+       <form name="itemInc" action='/incPantry' method="post">
+         <input type="hidden" name="itemInc" value="<%=data[i].name%>"/>
+         <td><button type="submit" style="color: #97ba60" class="w3-button w3-hover-black">ADD</button></td>
+       </form>
+       <form name="itemDec" action='/decPantry' method="post">
+         <input type="hidden" name="itemDec" value="<%=data[i].name%>"/> 
+         <td><button type="submit" style="color: #97ba60" class="w3-button w3-hover-black">DELETE</button></td>
+       </form>
      </tr>
      <% }
      }else{ %>
@@ -168,7 +177,6 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
 <script>
 
 // ADD PANTRY MODAL
-
 
 // Get the Modal
 var modal_add_pantry = document.getElementById('addPantryModal');

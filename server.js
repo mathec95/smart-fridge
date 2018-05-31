@@ -55,3 +55,14 @@ app.post('/addPantry', function (req, res){
         res.redirect('/smartfridge#pantry');
 });
 
+app.post('/incPantry', function (req, res){
+	actions.incPantry(req);
+	res.redirect('/smartfridge#pantry');
+});
+
+app.post('/decPantry', function (req, res){
+        actions.decPantry(req);
+        res.redirect('/smartfridge#pantry');
+});
+
+

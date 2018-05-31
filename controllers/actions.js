@@ -45,3 +45,26 @@ exports.addPantry = function (req) {
 	});
 }
 
+exports.incPantry = function (req) {
+	var options = {
+		scriptPath: '/var/www/node/controllers/scripts/',
+		args: [req.body.itemInc]
+	}
+	PythonShell.run('inc_pantry.py', options, function (err, results) {
+		if (err) throw err;
+		console.log('results: %j', results);
+	});
+}
+
+
+exports.decPantry = function (req) {
+        var options = {
+                scriptPath: '/var/www/node/controllers/scripts/',
+                args: [req.body.itemDec]
+        }
+        PythonShell.run('dec_pantry.py', options, function (err, results) {
+                if (err) throw err;
+                console.log('results: %j', results);
+        });
+}
+
