@@ -4,6 +4,7 @@ import sys
 import MySQLdb
 import argparse
 
+# use argpares to parse through the arguments passed from the decPantry function in action.js
 parser = argparse.ArgumentParser()
 parser.add_argument("itemDec")
 args = parser.parse_args()
@@ -28,7 +29,7 @@ quantity -= 1
 # check if new quantity is zero
 if quantity == 0:
 	cursor.execute("DELETE FROM purchases WHERE barcode_num = '%s'" % barcode)
-
+# if the new quantity is not zero, just update the quantity
 else:
 	cursor.execute("UPDATE purchases SET quantity = '%s' WHERE barcode_num = '%s'" % (quantity, barcode))
 db.commit()

@@ -4,6 +4,7 @@ import sys
 import MySQLdb
 import argparse
 
+# use argparse to parse through arguments passed by incPantry function in actions.js
 parser = argparse.ArgumentParser()
 parser.add_argument("itemInc")
 args = parser.parse_args()
@@ -22,6 +23,8 @@ barcode = result[0][0]
 # update the quantity of that item
 cursor.execute("SELECT quantity FROM purchases WHERE barcode_num = '%s'" % barcode)
 result = cursor.fetchall()
+
+# cursor.fetchall will return a double array of rows of the table.
 quantity = result[0][0]
 quantity += 1
 cursor.execute("UPDATE purchases SET quantity = '%s' WHERE barcode_num = '%s'" % (quantity, barcode))

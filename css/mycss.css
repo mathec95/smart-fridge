@@ -67,5 +67,6 @@
     cursor: pointer;
 }
 
+/* Custom padding for the add button in the pantry section*/
 .my-padding-64{padding-bottom:64px!important}
 
