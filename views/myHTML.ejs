@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" type="text/css" href="mycss.css"> 
 <link rel="stylesheet" type="text/css" href="w3css.css"> 
-<!-- additional css: background images -->
 <style> body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;} body, 
 html {
     height: 100%;
@@ -19,28 +18,16 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
-/* First image (Home) */ 
+/* First image (Logo. Full height) */ 
 .bgimg-1 {
     background-image: url("fridgeofveggies.jpg");
     min-height: 100%;
 }
-/* Second image (Pantry) */ 
+/* Second image (Portfolio) */ 
 .bgimg-2 {
     background-image: url("strawberries.jpg");
     min-height: 400px;
 }
-
-/* plus and minus signs on pantry table */
-.pantryimg-1 {
-   background-image: url("plussign.jpg");
-   min-height: 20px;
-}
-
-.pantryimg-2 {
-   background-image: url("minus_transparent.jpg");
-   min-heigth: 20px;
-}
-
 .w3-wide {letter-spacing: 10px;} .w3-hover-opacity {cursor: 
 pointer;} /* Turn off parallax scrolling for tablets and phones 
 */ @media only screen and (max-device-width: 1024px) {
@@ -67,7 +54,7 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
   </div> 
 
 </div>
-<!-- First Parallax Image with Text --> 
+<!-- First Parallax Image with Logo Text --> 
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle" style="white-space:nowrap;">
     <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">MY <span class="w3-hide-small">SMART</span> FRIDGE</span>
@@ -78,17 +65,14 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
 <div class="w3-content w3-container w3-padding-64" id="pantry">
   <h3 class="w3-center">MY PANTRY</h3>
   <p class="w3-center"><em>Here's what is in your pantry!</em></p> 
-<!-- Tabel to display the contents of the pantry -->
   <table class="w3-table w3-table-all">
      <tr>
-       <!-- Change table headings here -->
        <th width="50px">No.</th>
        <th>Name</th>
        <th>Quantity</th>
-       <th> </th>
-       <th> </th>
+       <th>Add</th>
+       <th>Delete</th>
      </tr>    
-     <!-- Use <%1+1; %> to indicate that you are switching in and out of javascript -->
      <% if(data.length){
        for(var i = 0;i < data.length;i++) { %>
      <tr>
@@ -96,11 +80,10 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
        <input type="hidden" name="itemName" value="<%=data[i].name%>"/>
        <td><%=data[i].name%></td>
        <td><%=data[i].quantity%></td>
-       <!-- I used forms for the buttons so I could give the buttons an action -->
        <form name="itemInc" action='/incPantry' method="post">
          <input type="hidden" name="itemInc" value="<%=data[i].name%>"/>
          <td><button type="submit" style="color: #97ba60" class="w3-button w3-hover-black"><img src="plussign.jpg" class="my-image-resize"></img></button></td>
-       </form
+       </form>
        <form name="itemDec" action='/decPantry' method="post">
          <input type="hidden" name="itemDec" value="<%=data[i].name%>"/> 
          <td><button type="submit" style="color: #e8541e" class="w3-button w3-hover-black"><img src="minus_transparent.jpg" class="my-image-resize"></img></button></td>
@@ -166,8 +149,6 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
         <br/>
         <input class="w3-input" name="category" type="text" placeholder="category"></input>
         <br/>
-	<input class="w3-input" name="quantity" type="text" placeholder="quantity"></input>
-	<br/>
         <br/>
         <button type="submit" class="w3-button">ADD</button>
      </form>
@@ -279,5 +260,6 @@ function toggleFunction() {
     }
 }
 
-
-</script> </body> </html>
+</script>
+</body> 
+</html>
