@@ -67,7 +67,7 @@ app.use(connection(mysql,{
 
 // If the user types only the IP address with no indication of the webpage name,
 // redirect to the webpage anyway.
-app.get('/', function (res){
+app.get('/', function (req, res){
 	res.redirect('/smartfridge')
 });
 
@@ -109,3 +109,4 @@ app.post('/decPantry', function (req, res){
         actions.decPantry(req);
         res.redirect('/smartfridge#pantry');
 });
+

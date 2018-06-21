@@ -10,12 +10,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("barcode")
 parser.add_argument("name")
 parser.add_argument("category")
+parser.add_argument("quantity")
 args = parser.parse_args()
 
 #set each argument equal to a variable so it can be manipulated in the script
 barcode = args.barcode
 name = args.name
 category = args.category
+quantity = args.quantity
 
 #open database connection
 db = MySQLdb.connect("localhost","emma","sudosudo!!","pantry")
@@ -32,7 +34,7 @@ row_count = cursor.rowcount
 #if this barcode is not found in product_list
 if row_count == 0:
  	#Add the item into the product_list table
-	cursor.execute("INSERT INTO product_list(name, barcode_num, category) VALUES ('%s', %s, '%s')" % (name, barcode, category))
+	cursor.execute("INSERT INTO product_list(name, barcode_num, category, quantity) VALUES ('%s', %s, '%s', '%s')" % (name, barcode, category, quantity))
 	# save changes made to the database
 	db.commit()
 #close database connection

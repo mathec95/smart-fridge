@@ -9,7 +9,7 @@ var PythonShell = require('python-shell');
 exports.addDB = function (req) {
 	var options = {
 		scriptPath: '/var/www/node/controllers/scripts/',
-		args: [req.body.barcode, req.body.name, req.body.category]
+		args: [req.body.barcode, req.body.name, req.body.category, req.body.quantity]
 	}
 	PythonShell.run('add.py', options, function (err, results) {
 		if (err) throw err;

@@ -33,18 +33,27 @@ if cursor.rowcount == 0:
 		# add item to database
 #		cursor.execute("INSERT INTO product_list(name, barcode_num, category) VALUES ('%s', '%s', '%s')" % (name, barcode, category))
 #		db.commit()
-
 	# add item to purchases list
+
+	#if this barcode is found in the database
 	if cursor.rowcount != 0:
-		cursor.execute("INSERT INTO purchases(barcode_num) VALUES ('%s')" % barcode)
+		# get the count per package from product_list
+		cursor.execute("SELECT count FROM product_list WHERE barcode_num = '%s'" % barcode)
+		result = cursor.fetchall()
+		count = result[0][0]
+		cursor.execute("INSERT INTO purchases(barcode_num, quantity) VALUES ('%s','%s')" % (barcode, count))
 		db.commit()
 # if the item already exists in purchases, update the quantity of that item
 elif cursor.rowcount != 0:
+	# get the number of items per package
+	cursor.execute("SELECT count FROM product_list WHERE barcode_num = '%s'" % barcode)
+	result = cursor.fetchall()
+	count = result[0][0]
 	cursor.execute("SELECT quantity FROM purchases WHERE barcode_num = '%s'" % barcode)
 	result = cursor.fetchall()
 	# Set the resulting quantity equal to a variable we can manipulate
 	quantity = result[0][0]
-	quantity += 1
+	quantity += count
 	cursor.execute("UPDATE purchases SET quantity = '%s' WHERE barcode_num = '%s'" % (quantity, barcode))
 	db.commit()
 db.close()
