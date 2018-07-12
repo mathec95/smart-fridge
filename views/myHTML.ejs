@@ -2,7 +2,8 @@
 <html> 
 <title>Smart Fridge</title> 
 <meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="15"> 
 <link rel="stylesheet" type="text/css" href="mycss.css"> 
 <link rel="stylesheet" type="text/css" href="w3css.css"> 
 <style> body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;} body, 
@@ -82,11 +83,14 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
        <td><%=data[i].quantity%></td>
        <form name="itemInc" action='/incPantry' method="post">
          <input type="hidden" name="itemInc" value="<%=data[i].name%>"/>
-         <td><button type="submit" style="color: #97ba60" class="w3-button w3-hover-black"><img src="plussign.jpg" class="my-image-resize"></img></button></td>
+         <td><button type="submit" class="w3-button w3-hover-black">
+           <img src="plussign.jpg" class="my-image-resize"></img>
+         </button></td>
        </form>
        <form name="itemDec" action='/decPantry' method="post">
          <input type="hidden" name="itemDec" value="<%=data[i].name%>"/> 
-         <td><button type="submit" style="color: #e8541e" class="w3-button w3-hover-black"><img src="minus_transparent.jpg" class="my-image-resize"></img></button></td>
+         <td><button type="submit" class="w3-button w3-hover-black">
+           <img src="minus_transparent.jpg" class="my-image-resize"></img></button></td>
        </form>
      </tr>
      <% }
@@ -149,6 +153,8 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
         <br/>
         <input class="w3-input" name="category" type="text" placeholder="category"></input>
         <br/>
+	<input class="w3-input" name="count" type="text" placeholder="count per package"></input>
+        <br/>
         <br/>
         <button type="submit" class="w3-button">ADD</button>
      </form>
@@ -175,70 +181,51 @@ pointer;} /* Turn off parallax scrolling for tablets and phones
   <a href="#" class="w3-button w3-light-grey">To the top</a> 
 </footer> 
 <script>
-
 // ADD PANTRY MODAL
-
 // Get the Modal
 var modal_add_pantry = document.getElementById('addPantryModal');
-
 // Get the button that opens the modal
 var btn_add_pantry = document.getElementById("addPantryBtn");
-
 // Get the element that closes the modal
 var close_add_pantry = document.getElementsByClassName("close-add-pantry")[0];
-
 // When the user clicks the button, open the modal
 btn_add_pantry.onclick = function() {
     modal_add_pantry.style.display = "block";
 }
-
 // When the user clicks on CLOSE, close the modal
 close_add_pantry.onclick = function() {
     modal_add_pantry.style.display = "none";
 }
-
 // ADD MODAL
-
 // Get the Modal
 var modal_add = document.getElementById('addModal');
-
 // Get the button that opens the modal
 var btn_add = document.getElementById("addBtn");
-
 // Get the element that closes the modal
 var close_add = document.getElementsByClassName("close-add")[0];
-
 // When the user clicks the button, open the modal
 btn_add.onclick = function() {
     modal_add.style.display = "block";
 }
-
 // When the user clicks on CLOSE, close the modal
 close_add.onclick = function() {
     modal_add.style.display = "none";
 }
-
 // DELETE MODAL
-
 // Get the Modal
 var modal_delete = document.getElementById('deleteModal');
-
 // Get the button that opens the modal
 var btn_delete = document.getElementById("deleteBtn");
-
 // Get the element that closes the modal
 var close_delete = document.getElementsByClassName("close-delete")[0];
-
 // When the user clicks the button, open the modal
 btn_delete.onclick = function() {
     modal_delete.style.display = "block";
 }
-
 // When the user clicks on CLOSE, close the modal
 close_delete.onclick = function() {
     modal_delete.style.display = "none";
 }
-
 // Change style of navbar on scroll
 window.onscroll = function() {myFunction()};
 function myFunction() {
@@ -249,7 +236,6 @@ function myFunction() {
         navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
     }
 }
-
 // Used to toggle the menu on small screens when clicking on the menu button
 function toggleFunction() {
     var x = document.getElementById("navDemo");
@@ -259,7 +245,6 @@ function toggleFunction() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
-
 </script>
 </body> 
-</html>
+</html> 

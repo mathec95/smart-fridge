@@ -13,7 +13,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // Give the server a file to look to when "actions" is called.
-var actions = require('/var/www/node/controllers/actions');
+var actions = require('/var/www/smart-fridge/controllers/actions');
 
 // The port number is telling the server what traffic to send the requests on (having it not be 
 // a typical http port makes it more secure).
@@ -57,6 +57,16 @@ server.listen(PORT, function(){
 });
 
 // Connect to mySQL database
+/*
+var conn = mysql.createConnection({
+	host: 'localhost',
+	user: 'emma',
+	password: 'sudosudo!!',
+	database: 'pantry'
+});
+conn.connect();
+*/
+
 app.use(connection(mysql,{
 	host: 'localhost',
 	user: 'emma',
@@ -64,6 +74,8 @@ app.use(connection(mysql,{
 	database: 'pantry'
 	}, 'pool')
 );
+
+
 
 // If the user types only the IP address with no indication of the webpage name,
 // redirect to the webpage anyway.

@@ -10,6 +10,7 @@ try
   $barcode= $_POST['barcode'];
   $name = $_POST['name'];
   $category = $_POST['category'];
+  $count = $_POST['count'];
 
 // FIX ME!! \/ \/ \/
   exec("/usr/bin/python sudo /var/www/html/add.py", $barcode);
